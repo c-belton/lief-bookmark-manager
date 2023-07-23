@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lief</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous">
+    </script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+            integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+            crossorigin="anonymous">
+    </script>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'lief/css/main.css' %}">
+    <script src="{% static 'lief/js/main.js' %}"></script>
+</head>
+<body class="body-layout">
+    <div class="sidebar static-sidebar">
+      <div class="sidebar-header d-flex justify-content-center">
+        <h3 class="navbar-brand">Lief</h3>
+      </div>
+
+      <div class="sidebar-menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link home-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a
+                        class="nav-link"
+                        id="addBookmarkLink"
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addBookmarkModal"
+                >
+                    <span id="addBookmarkText">Add Bookmark</span>
+                </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link collapsed"
+                href="#"
+                data-bs-toggle="collapse"
+                data-bs-target="#categoryCollapse"
+                aria-expanded="false"
+              >
+                Categories
+              </a>
+              <div class="category-collapse collapse" id="categoryCollapse">
+                <ul class="nav flex-column">
+                  {% for category in categories %}
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="?category={{ category.name }}"
+                      id="categoriesNavLink"
+                    >{{ category.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#showColumnsCollapse" aria-expanded="false">
+                    Show Columns
+                </a>
+                <div class="collapse" id="showColumnsCollapse">
+                    <ul class="nav flex-column column-visibility-menu">
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="summaryToggle">Summary</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="summaryToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="textToggle">Tweet</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="textToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="dateToggle">Date</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="dateToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="authorToggle">Author</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="authorToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="categoryToggle">Category</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="categoryToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="tagsToggle">Tags</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="tagsToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="notesToggle">Notes</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="notesToggle">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check">
+                                <label class="form-check-label" for="actionsToggle">Actions</label>
+                                <input class="form-check-input column-checkbox ms-auto" type="checkbox" id="actionsToggle">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#sortCollapse"
+                        aria-expanded="false"
+                >
+                    Sort
+                </a>
+                <div class="collapse" id="sortCollapse">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link sort-nav-link" href="#" id="sort-date">
+                                Date
+                                <div class="sort-icon-container">
+                                    <img
+                                            src="{{ STATIC_URL }}static/lief/icons/sortup.svg"
+                                            class="icon-button clickable sort-icon-asc"
+                                            id="sort-date-asc"
+                                    >
+                                    <img
+                                            src="{{ STATIC_URL }}static/lief/icons/sortdown.svg"
+                                            class="icon-button clickable sort-icon-desc"
+                                            id="sort-date-desc"
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link sort-nav-link" href="#" id="sort-author">
+                                Author
+                                <div class="sort-icon-container">
+                                    <img
+                                            src="{{ STATIC_URL }}static/lief/icons/sortup.svg"
+                                            class="icon-button clickable sort-icon-asc"
+                                            id="sort-author-asc"
+                                    >
+                                    <img
+                                            src="{{ STATIC_URL }}static/lief/icons/sortdown.svg"
+                                            class="icon-button clickable sort-icon-desc"
+                                            id="sort-author-desc"
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link sort-nav-link" href="#" id="sort-category">
+                                Category
+                                <div class="sort-icon-container">
+                                    <img
+                                        src="{{ STATIC_URL }}static/lief/icons/sortup.svg"
+                                         class="icon-button clickable sort-icon-asc"
+                                         id="sort-category-asc"
+                                    >
+                                    <img
+                                            src="{{ STATIC_URL }}static/lief/icons/sortdown.svg"
+                                            class="icon-button clickable sort-icon-desc"
+                                            id="sort-category-desc"
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+          </ul>
+         </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+          <div class="sidebar-icons">
+              <img src="{{ STATIC_URL }}static/lief/icons/gear.svg" alt="Settings"
+                   class="settings-icon clickable" title="Settings"/>
+          </div>
+      </div>
+    </div>
+
+    <main class="container main-content">
+        <div class="page-container">
+            {% block content %}
+            <!-- Content from child templates will appear here -->
+            {% endblock content %}
+        </div>
+    </main>
+</body>
+</html>

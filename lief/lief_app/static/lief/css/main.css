@@ -1,0 +1,447 @@
+/* Global Styles */
+html {
+  overflow: hidden; /* Prevents scroll bounce */
+  height: 100%; /* Ensures full viewport height */
+}
+
+.body-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background-color: #ffffff; /* white */
+  color: #37474f; /* a dark gray */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* Prevent scroll from affecting the entire page */
+}
+
+.main-content {
+  flex-grow: 1;  /* Makes the main content take up the rest of the width */
+  margin-left: 20px;
+  max-width: calc(100% - 175px);  /* Prevents the main content from going under the sidebar */
+  width: 100%;
+  margin-right: auto;
+}
+
+.main-content .container {
+  max-width: 100%;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+/* Sidebar Styles */
+.static-sidebar {
+    flex: 0 0 auto; /* Makes the sidebar non-grow, non-shrink, and auto basic size */
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 175px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+  background: #e8f4ea; /* a very light green, almost white */
+  z-index: 2;
+}
+
+.sidebar .navbar-brand {
+  padding-top: 20px;
+  font-size: 1.75rem;
+}
+
+.sidebar-header {
+  height: 80px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.sidebar-menu {
+  overflow-y: auto; /* Allows scrolling within this section */
+  height: 100%;
+  max-height: calc(100vh - 130px); /* Adjust as needed to account for sidebar header and bottom height */
+  padding: 1rem;
+}
+
+.sidebar-bottom {
+  height: 50px;
+  width: 100%;
+  padding: 1rem 0;
+  border-top: 1px solid #ccc;
+}
+
+.sidebar .navbar-nav .nav-link {
+  font-size: 1rem;
+}
+
+.navbar {
+  max-width: 100%;
+}
+
+.nav-link {
+  padding-left: 5px;
+  white-space: normal;
+  word-break: break-word;
+  color: inherit;
+}
+
+.sort-nav-link {
+    display: flex;
+    align-items: center;   /* Vertically centers the items in flex container */
+    justify-content: space-between;
+}
+
+.sort-icon-container {
+    margin-left: auto;  /* Pushes the container to the right end */
+    display: flex;      /* Makes sure the icons are displayed inline */
+    align-items: center;
+
+}
+
+.category-collapse ul.nav.flex-column {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.column-visibility-menu .form-check {
+  display: flex;
+  align-items: center;  /* Vertically centers the label and checkbox */
+  padding-left: 5px;
+}
+
+@keyframes flash { /* Flashing animation for adding bookmark nav menu item */
+    0% {opacity: 1;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
+.flashing {
+    animation: flash 1s linear infinite;
+}
+
+
+/* Table Styles */
+.table {
+  border-collapse: separate;
+  display: none;
+}
+
+.table-responsive {
+  width: 100%;
+}
+
+.table-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.scrollable-table {
+  overflow: auto;
+}
+
+/* Table Cell Styles */
+.truncated-cell {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.expanded-cell {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.summary-cell {
+    width: 19%;
+    max-width: 200px;
+}
+
+.text-cell {
+    width: 29%;
+    max-width: 200px;
+}
+
+.author-cell {
+    width: 7%;
+    max-width: 200px;
+}
+
+.date-cell {
+    width: 6%;
+    max-width: 200px;
+}
+
+.category-cell {
+    width: 9%;
+    max-width: 200px;
+}
+
+.notes-cell {
+    width: 15%;
+    max-width: 200px;
+}
+
+.tags-cell {
+    width: 12.5%;
+    max-width: 200px;
+}
+
+.actions-cell {
+    position: relative;
+    width: 2.5%;
+    max-width: 200px;
+    height: 100%;
+}
+
+.actions-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.top-actions-row {
+    display: flex;
+    width: 100%;
+}
+
+.bottom-actions-row {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.actions-row:last-child {  /* Select only the last .actions-row (i.e., the bottom row) */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Pagination Styles */
+
+.pagination {
+  border-radius: 5px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.pagination .ellipsis {
+  margin: 0 5px;
+}
+
+.pagination-setting {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 9px; /* slightly different padding adjusted to ensure settings box aligns with link box due to font size */
+  margin-right: 10px; /* spacing between the two boxes */
+  background-color: #f8f9fa;
+}
+
+.pagination-setting .pagination-label {
+  margin-right: 5px;
+}
+
+.pagination-setting select {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 3px;
+  background-color: white;
+}
+
+.pagination-links {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+/* Modal Styles */
+
+.delete-modal-body {
+  border-bottom: 0.5px solid #dee2e6;
+}
+
+.delete-modal-footer {
+    border-top: none;
+}
+
+/* Collapse Styles */
+.category-collapse {
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* Font Styles */
+
+@font-face {
+    font-family: 'Sacramento';
+    src: url('/static/lief/fonts/Sacramento.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bentham';
+    src: url('/static/lief/fonts/Bentham.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#categoryHeading,
+.navbar-brand {
+    font-family: 'Sacramento', sans-serif;
+}
+
+.sticky-header-section,
+.sidebar-menu,
+.table-container,
+.modal-content {
+    font-family: 'Bentham', serif;
+}
+
+/* Text and Link Styles */
+
+a {
+  color: #1b5e20; /* a dark green */
+}
+
+#edit-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-right: -5px; /* Counteract margin-right on tag-containers */
+}
+
+.tag-container {
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  flex: 0 0 calc(33.33% - 5px); /* Approximately three tags per row with spacing */
+  max-width: calc(33.33% - 5px); /* Limit container width to 33.33% of the parent width */
+}
+
+
+/* Notifications Styles */
+#bookmarkAddedNotification,
+#bookmarkErrorNotification {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  display: none;
+}
+
+/* Icon and Input Styles */
+
+.btn-primary { /* Customize Bootstrap's .btn-primary class for our theme */
+    --bs-btn-bg: #1b5e20;
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-bg: #167730;
+    --bs-btn-hover-border-color: #ced4da;
+    --bs-btn-active-bg: #167730;
+    --bs-btn-active-border-color: #ced4da;
+    --bs-btn-disabled-bg: #1b5e20;
+    --bs-btn-disabled-border-color: #1b5e20;
+}
+
+.toggle-text-icon {
+  display: none; /* Hides unless JS dynamically attaches it to an expandable row*/
+  cursor: pointer;
+}
+
+.toggle-button-container,
+.link-button-container { /* Sets fixed width+height for the container due to dynamically generated icon quirks*/
+  width: 32px;
+  height: 22px
+}
+
+.icon-button {
+    background: none;
+    border: none;
+}
+
+.icon-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.link-button {
+    padding-right: 6px; /* Adjusts positioning of link button within div for better alignment with top actions */
+}
+
+.sidebar-icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settings-icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+#searchFieldContainer {
+  flex: 1; /* Should dynamically adjust to fill up rest of parent div as other elements are added */
+}
+
+.search-input {
+  width: 33%; /* Limits width of search-input box based on searchFieldContainer div */
+}
+
+.form-check-input {
+  border: 1px solid #ced4da;
+}
+
+.form-check-input:checked {
+  background-color: #1b5e20;
+  border: 1px solid #ced4da;
+}
+
+/* Scrollbar Styles */
+.scrollable-table::-webkit-scrollbar,
+.category-collapse::-webkit-scrollbar,
+.sidebar-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-table,
+.category-collapse,
+.sidebar-menu {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer */
+}

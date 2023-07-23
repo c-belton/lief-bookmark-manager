@@ -1,0 +1,9 @@
+venv/
+.DS_STORE
+.idea/
+.env
+lief/staticfiles/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
